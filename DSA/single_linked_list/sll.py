@@ -16,7 +16,7 @@ class SingleLinkedList():
         new_node = self.new_node(value)
         
         if self.head is None:
-            self.head = self.new_node
+            self.head = new_node
             return
 
         current = self.head
@@ -28,14 +28,8 @@ class SingleLinkedList():
     # Add value at beginning
     def insert_at_beginning(self, value):
         new_node = self.new_node(value)
-
-        if self.head is None:
-            self.head = new_node
-            return
-
         new_node.next = self.head
         self.head = new_node
-        return
 
     # Insert at position 
     def insert_at_position(self, pos, value):
@@ -44,11 +38,16 @@ class SingleLinkedList():
             self.insert_at_beginning(value)
             return
     
-        new_node = Node(value)
+        new_node = self.new_node(value)
         current = self.head
         
-        for _ in range(pos-1):
+        for _ in range(pos - 1):
+            if current is None:
+                raise IndexError("Position out of range")
             current = current.next
+
+        if current is None:
+            raise IndexError("Position out of range")
         
         new_node.next = current.next
         current.next = new_node
@@ -73,6 +72,7 @@ class SingleLinkedList():
         
         if self.head.next is None:
             self.head = None
+            return
         
         current = self.head
         while current.next.next:
