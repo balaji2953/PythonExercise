@@ -101,6 +101,15 @@ class SingleLinkedList():
             current = current.next
 
         return count
+    
+    def reverse_display(self, node):   # print reverse using recursive
+
+        if node is None:
+            return 
+        
+        self.reverse_display(node.next)
+
+        print(node.data, end="->" )
 
 list1 = SingleLinkedList(Node(1))
 list1.append(2)
@@ -122,3 +131,5 @@ list1.traversal()          # 1->2->2->None        O(n)
 print(list1.search(2))     # True                 O(n)
 
 print(list1.length())      # 3                    O(n)
+
+list1.reverse_display(list1.head)
